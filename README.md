@@ -33,10 +33,11 @@ MySQL database (port 3306)
 
 Step 3 — Access API documentation
 http://<vm-hostname>:8000/docs
-
+```
 
 ##3. Code Structure
 
+bash```
 insurance-checking-portal/
 │
 ├── api/                  # FastAPI backend
@@ -55,6 +56,7 @@ insurance-checking-portal/
 ├── docker-compose.yml    # containers (backend + mysql)
 ├── requirements.txt      # Python dependencies
 └── README.md             # documentation
+```
 
 ##4. User Stories
 
@@ -84,6 +86,7 @@ As an insurer, I want to revise my bids before submission deadlines so that I ca
 
 ##5. System Architecture
 
+bash```
 Frontend / Web Layer
 +-----------------------------------------------------------+
 |                   Frontend / Web Layer                    |
@@ -114,8 +117,10 @@ MySQL Database Layer
 |   plan_tiers, employee_coverage, insurers, bids,          |
 |   bidding_rounds                                          |
 +-----------------------------------------------------------+
+```
 
 ##6. API Summary
+
 Authentication
 POST /login
 
@@ -138,15 +143,16 @@ OpenAPI documentation
 http://<vm-hostname>:8000/docs
 
 ##7. Database Schema
+
 Key Tables
-employees            # Name, designation, category, project code
-plans                # Plan 1/2/3/4 definitions
-policy_categories    # GTL, GCI, GPA, GHS, GMM, FWMI
-plan_tiers           # Plan → policy → coverage value
-employee_coverage    # Auto-assigned coverage
-insurers             # Insurer information
-bids                 # Insurer submitted bids
-bidding_rounds       # Round 1 / Round 2 / Final
+-employees            # Name, designation, category, project code
+-plans                # Plan 1/2/3/4 definitions
+-policy_categories    # GTL, GCI, GPA, GHS, GMM, FWMI
+-plan_tiers           # Plan → policy → coverage value
+-employee_coverage    # Auto-assigned coverage
+-insurers             # Insurer information
+-bids                 # Insurer submitted bids
+-bidding_rounds       # Round 1 / Round 2 / Final
 
 ##8. Diagrams
 
