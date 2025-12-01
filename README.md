@@ -1,20 +1,24 @@
-TCX3901 Insurance Checking Portal
-1. Project Description
+✅ COPY–PASTE THIS DIRECTLY INTO README.md (Codespaces-Safe Version)
+# TCX3901 Insurance Checking Portal
 
-The Insurance Checking Portal is a backend-driven web system designed to automate the insurance management workflow at Kurihara Kogyo Co. Ltd.
+## 1. Project Description
+
+The **Insurance Checking Portal** is a backend-driven web system designed to automate the insurance management workflow at **Kurihara Kogyo Co. Ltd.**
 
 The system provides:
 
-• Daily-use features such as employee insurance self-checking
+- Daily-use features such as employee insurance self-checking  
+- HR tools for plan assignment and FWMI compliance checking  
+- Annual bidding functions for insurers to submit quotations  
 
-• HR operational tools for plan assignment and FWMI compliance checking
+This replaces Excel-based manual processes with a FastAPI–MySQL solution deployed on the NUS SoC VM using Docker.
 
-• Annual bidding functions for insurers to submit quotations
+---
 
-This platform replaces Excel-based manual processes with a modern FastAPI + MySQL solution deployed on the NUS SoC VM using Docker.
+## 2. Setup
 
-2. Setup
-Step 1 — Clone the repository
+### Step 1 — Clone the repository
+```bash
 git clone https://github.com/<your-repo>.git
 cd insurance-checking-portal
 
@@ -91,7 +95,7 @@ Frontend / Web Layer
 |   • Insurer Bid Portal                                    |
 +-----------------------------------------------------------+
 
-FastAPI Backend Layer
+FastAPI Application Layer
                     ⬇ HTTPS (JWT Protected)
 
 +-----------------------------------------------------------+
@@ -100,7 +104,7 @@ FastAPI Backend Layer
 |   • Employee Coverage API                                 |
 |   • Admin CRUD & Compliance API                           |
 |   • Insurer Bidding API                                   |
-|   • Reporting/Export                                      |
+|   • Reporting / Export                                    |
 |   • Plan Assignment Engine                                |
 +-----------------------------------------------------------+
 
@@ -116,11 +120,11 @@ MySQL Database Layer
 
 6. API Summary
 Authentication
-POST /login      # JWT login
+POST /login
 
 Employee
-GET /employees/{id}/coverage   # View personal coverage
-GET /employees/{id}/claims     # View required documents
+GET /employees/{id}/coverage
+GET /employees/{id}/claims
 
 Admin
 POST /employees
@@ -133,55 +137,48 @@ POST /bids
 PUT /bids/{id}
 GET /bidding_rounds/current
 
-OpenAPI Docs
+OpenAPI documentation
 http://<vm-hostname>:8000/docs
 
 7. Database Schema
 Key Tables
 employees            # Name, designation, category, project code
-plans                # Plan 1/2/3/4 definitions (extracted from AIA document)
+plans                # Plan 1/2/3/4 definitions
 policy_categories    # GTL, GCI, GPA, GHS, GMM, FWMI
-plan_tiers           # Mapping of plan → policy → coverage value
+plan_tiers           # Plan → policy → coverage value
 employee_coverage    # Auto-assigned coverage
-insurers             # Insurance companies
-bids                 # Insurer submissions
+insurers             # Insurer information
+bids                 # Insurer submitted bids
 bidding_rounds       # Round 1 / Round 2 / Final
-
-
-Full coverage values follow the AIA Group Insurance Coverage 2025/2026 letter (Page 1).
 
 8. Diagrams
 
 (Insert screenshots when ready)
 
-System Architecture Diagram
+System Architecture
 
 ERD
 
-Sequence Diagrams (Login, Plan Assignment, Bid Submission)
+Login Sequence Diagram
 
-Deployment Diagram (Docker + SoC VM)
+Plan Assignment Sequence Diagram
+
+Bid Submission Sequence
 
 9. Testing
-
-Testing includes:
-
-9.1 Authentication testing (JWT validation, invalid login)
+9.1 JWT authentication tests
 9.2 Employee coverage retrieval tests
-9.3 Plan assignment logic (Designation → Plan → Coverage)
+9.3 Plan assignment logic tests
 9.4 FWMI compliance tests
-9.5 Bid submission & validation tests
+9.5 Bid submission validation tests
 9.6 MySQL integration tests
 
-
-Screenshots of Postman/API tests should be added here later.
-
 10. Non-Functional Requirements (NFRs)
-10.1 All API responses must return within 2 seconds.
+10.1 API responses must return within 2 seconds.
 10.2 JWT must secure all protected endpoints.
-10.3 Coverage data must match AIA coverage values exactly.
-10.4 System must run fully on SoC VM via Docker.
-10.5 Data must use proper numeric types (no float rounding issues).
+10.3 Coverage data must match AIA values exactly.
+10.4 System must run on SoC VM using Docker.
+10.5 Numeric values must use proper types (no float errors).
 
 11. Deployment Instructions
 Deploy on SoC VM
@@ -197,12 +194,12 @@ http://<vm-hostname>:8000/docs
 
 12. References
 
-AIA Group Insurance Coverage Letter (29 Sept 2025) — plan benefits & coverage values
+AIA Group Insurance Coverage Letter (29 Sept 2025)
 
 FastAPI Documentation
 
 SQLModel Documentation
 
-Docker & Docker Compose Documentation
+Docker Documentation
 
 BIT TCX3901 Module Guide
