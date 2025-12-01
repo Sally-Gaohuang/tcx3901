@@ -55,17 +55,17 @@ insurance-checking-portal/
 └── README.md             # documentation
 
 4. User Stories
+
 4.1 Employee User Stories
 
 As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).
-
 As an employee, I want to see claim document requirements so that I can prepare claims properly.
-
 As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.
-
 As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.
 
+
 4.2 HR Admin User Stories
+
 
 As an HR admin, I want to manage employee records so that insurance headcount remains accurate.
 
@@ -77,7 +77,9 @@ As an HR admin, I want to compare insurer bids side-by-side so that I can choose
 
 As an HR admin, I want to generate coverage reports so that I can submit them to management.
 
+
 4.3 Insurer User Stories
+
 
 As an insurer, I want to view required categories so that I can prepare accurate quotations.
 
