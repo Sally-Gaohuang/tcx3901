@@ -1,244 +1,191 @@
-# TCX3901
-TCX3901 Insurance Checking System
-##1. Overview of Coverage Packages
-
-According to the AIA Group Insurance Coverage letter (Page 1), the policyholder is covered under the following benefit categories:
-
-###1.1 Group Life & TPD (GTL)
-
-Plan 1: Assistant Managers & Above — $100,000
-
-Plan 2: All Other Employees — $70,000
-
-###1.2 Group Critical Illness (GCI)
-
-Plan 1: Assistant Managers & Above — $40,000
-
-Plan 2: All Other Employees — $28,000
-
-###1.3 Group Accidental Death & Dismemberment (GPA)
-
-Plan 1: Assistant Managers & Above — $150,000
-
-Plan 2: All Other Employees (including SP & WP) — $100,000
-
-###1.4 Group Hospitalisation & Surgical (GHS)
-
-Plan 1: Assistant Managers & Above — 2-Bed Private
-
-Plan 2: Engineers, Secretaries & Executives — 4-Bed Private
-
-Plan 3: Assistant Engineers & Below — 4-Bed Government/Rest
-
-###1.5 Group H&S – Foreign Worker (FWMI)
-
-Applies only to S-Pass & Work Permit Holders
-
-Up to $60,000 per policy year
-
-Co-insurance 25% for claims over $15,000
-
-###1.6 Group Supplementary Major Medical (GMM)
-
-Plan 1: Assistant Managers & Above — Overall Max $100,000
-
-Plan 2: Executives, Secretaries — Overall Max $65,000
-
-Plan 3: Engineers & Below — Overall Max $40,000
-
-###2. User Story Mapping to Packages
-
-This section explains how each user interacts with the system and what benefits they see.
-
-##2.1 Employee User Stories
-E1 — View My Insurance Coverage
-
-As an employee, I want to check my assigned insurance packages so that I always know what I am entitled to and can provide correct information to hospitals.
-
-What the employee sees (auto-generated based on grade/category):
-
-GTL (Life & TPD)
-GCI (Critical Illness)
-GPA (Accident) — staff only
-GHS (Hospital & Surgical)
-GMM (Major Medical)
-FWMI (only for WP/S-Pass employees)
-
-Example:
-
-If user is Assistant Engineer (Plan 3)
-
-GTL: $70,000  
-GCI: $28,000  
-GPA: $100,000  
-GHS: 4-Bed Govt  
-GMM: $40,000  
-FWMI: — (Not a Work Permit holder)
-
-###E2 — Check My Claim Documents
-
-The system displays:
-
-Hospitalisation claim requirements
-
-Critical illness claim documents
-
-Accident claim documents
-
-FWMI claim steps (for WP/SP holders)
-
-###E3 — FWMI Compliance (WP/S-Pass Only)
-
-As a foreign worker, I want to see if my FWMI meets MOM requirements.
-
-System shows:
-
-FWMI Coverage: $60,000  
-Required Minimum: $60,000  
-Status: ✓ Compliant
-
-##2.2 HR Admin User Stories
-###A1 — Add/Edit Employee Records
-
-The admin enters:
-
-Name
-
-Category (Staff vs WP/S Pass)
-
-Designation
-
-Project code
-
-The system automatically assigns the correct plan number and coverage values based on the AIA document.
-Example:
-
-Assistant Manager → Plan 1
-
-Engineers → Plan 2 / Plan 3
-
-WP/S Pass → FWMI + Plan 3 equivalents
-
-###A2 — Automatic Plan Assignment (Key System Logic)
-Employee Type	Assigned Packages
-Assistant Managers & Above	GTL 100K, GCI 40K, GPA 150K, GHS Plan 1, GMM 100K
-Engineers / Secretaries / Executives	GTL 70K, GCI 28K, GPA 100K, GHS Plan 2, GMM 65K
-Assistant Engineers & Below	GTL 70K, GCI 28K, GPA 100K, GHS Plan 3, GMM 40K
-S-Pass & Work Permit	FWMI 60K + GHS (FW Plan), GMM (40K), GCI 28K, GTL 70K
-
-(All values extracted from AIA coverage letter – Page 1)
-
-###A3 — View Full Employee Coverage
-
-Admin can see:
-
-Plan type
-
-Sum insured
-
-Ward entitlement
-
-Accident & CI limits
-
-FWMI status (for WP/SP)
-
-###A4 — Compare Insurer Quotations
-
-The admin compares:
-
-FWMI premiums
-
-GHS premiums
-
-GMM premiums
-
-GPA / GTL / GCI rates
-
-Total cost per insurer
-
-###A5 — FWMI Compliance Dashboard
-
-Admin receives alerts for:
-
-Employee: [Name]
-Coverage: FWMI $30,000
-Required: $60,000
-Status: ❌ Non-Compliant
-
-###2.3 Insurer User Stories
-I1 — Submit Bids
-
-Insurer submits:
-
-Policy	Premium
-GTL	$XX
-GCI	$XX
-GHS	$XX
-GMM	$XX
-GPA	$XX
-FWMI	$XX
-
-System validates completeness.
-
-###I2 — Edit Before Deadline
-
-Round status = “Open” → allow editing
-Round status = “Closed” → view only
-
-###I3 — View Required Coverages
-
-Insurer sees policy categories extracted from AIA document:
-
-GTL
-GCI
-GPA
-GHS
-FWMI
-GMM
-
-(This ensures insurers quote for the correct benefits.)
-
-3. System Mapping Summary (One-Glance Table)
-Module	Who Uses It	Coverage Loaded From AIA Document
-Employee Self-Check	Employees	GTL, GCI, GPA, GHS, GMM, FWMI
-Admin Employee CRUD	HR Admin	All packages, plan assignment rules
-Plan Assignment Engine	System	All Plans 1–4 mapping
-Insurer Bidding	Insurers	Same categories as AIA policies
-Comparison Dashboard	HR Admin	All premiums mapped to same categories
-
-##User Story Statements (Final)
-###Employee User Stories
+# TCX3901 Insurance Checking Portal
+1. Project Description
 bash```
-As an employee, I want to view my full insurance coverage (GTL, GCI, GPA, GHS, GMM, FWMI) so that I know exactly what benefits I am entitled to.
+The Insurance Checking Portal is a backend-driven web system designed to automate the insurance management workflow at Kurihara Kogyo Co. Ltd. The system provides:
+Daily-use features such as employee insurance self-checking
+HR operational tools for plan assignment and compliance checking
+Annual bidding functions for insurers to submit quotes
+This platform replaces Excel-based manual processes with a modern FastAPI–MySQL solution deployed on the NUS SoC VM using Docker.```
+2. Setup
+Step 1 — Clone the repository
+bash```
+git clone https://github.com/<your-repo>.git
+cd insurance-checking-portal```
 
-As an employee, I want to access the list of required claim documents so that I can submit claims correctly without confusion.
+Step 2 — Start the system with Docker
+bash```
+docker-compose up -d```
 
-As a Work Permit or S-Pass holder, I want to check whether my FWMI coverage meets MOM’s minimum requirement of $60,000 so that I feel secure about my medical protection.
 
-As an employee, I want to verify my ward entitlement and sum insured before hospital admission so that I can inform the hospital accurately.```
-
-###HR Admin User Stories
+This starts:
+bash```
+FastAPI backend (port 8000)
+MySQL database (port 3306)
 ```
-As an HR admin, I want to add, update, or deactivate employee records so that the insurance headcount remains accurate.
+Step 3 — Access API docs
+bash```
+http://<vm-hostname>:8000/docs```
 
-As an HR admin, I want the system to automatically assign the correct insurance plan based on employee designation and category so that coverage is consistent and error-free.
-
-As an HR admin, I want to view an employee’s complete insurance coverage in a single page so that I can quickly verify correctness when enquiries arise.
-
-As an HR admin, I want the system to detect FWMI non-compliance automatically so that I can address issues before MOM audits.
-
-As an HR admin, I want to generate insurance coverage reports so that I can share data with management or insurers easily.
-
-As an HR admin, I want to compare insurers’ quotations side-by-side so that I can choose the most cost-effective package for the company.
-
-As an HR admin, I want each employee to have one active project code so that insurance costs can be allocated to the correct project.```
-
-###Insurer User Stories
+3. Code Structure
+bash```
+insurance-checking-portal/
+│
+├── api/                  # FastAPI backend
+│   ├── main.py           # main entry point
+│   ├── auth/             # JWT authentication
+│   ├── models/           # SQLModel ORM models
+│   ├── routers/          # API endpoints
+│   ├── services/         # business logic (plan assignment, compliance)
+│   ├── database.py       # DB connection
+│   ├── seed.py           # initial coverage & plan seeds
+│
+├── sql/                  # SQL migration / seed scripts
+│
+├── web/                  # (Optional) Frontend files
+│
+├── docker-compose.yml    # containers (backend + mysql)
+├── requirements.txt      # Python dependencies
+└── README.md             # documentation
 ```
-As an insurer, I want to view the required coverage categories (GTL, GCI, GPA, GHS, GMM, FWMI) so that I can prepare accurate quotations.
+4. User Stories
+4.1 Employee User Stories
+bash```
+As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).
+As an employee, I want to see claim document requirements so that I can prepare claims properly.
+As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.
+As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.```
 
-As an insurer, I want to submit premiums for each insurance category so that HR can evaluate my quotation during the bidding round.
+4.2 HR Admin User Stories
+bash```
+As an HR admin, I want to manage employee records so that insurance headcount remains accurate.
+As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.
+As an HR admin, I want to check FWMI non-compliance so that I avoid MOM penalties.
+As an HR admin, I want to compare insurer bids side-by-side so that I can choose the most cost-effective insurer.
+As an HR admin, I want to generate coverage reports so that I can submit them to management.
+```
+4.3 Insurer User Stories
+bash```
+As an insurer, I want to view required categories so that I can prepare accurate quotations.
+As an insurer, I want to submit premiums for each policy type so that HR can evaluate my bids.
+As an insurer, I want to revise my bids before submission deadlines so that I can correct mistakes.
+```
+5. System Architecture
+bash```
++-----------------------------------------------------------+
+|                   Frontend / Web Layer                    |
+|   - Employee Dashboard                                    |
+|   - Admin Dashboard                                       |
+|   - Insurer Bid Portal                                    |
++-----------------------------------------------------------+
 
-As an insurer, I want to revise my submitted bid before the round closes so that I can correct any mistakes or improve my offer.
+                    ⬇ HTTPS (JWT Protected)
 
-As an insurer, I want to review my previous bids so that I can maintain consistency in multi-round submissions.```
++-----------------------------------------------------------+
+|                    FastAPI Application Layer              |
+|   - Authentication (JWT)                                  |
+|   - Employee Coverage API                                 |
+|   - Admin CRUD & Compliance API                           |
+|   - Insurer Bidding API                                   |
+|   - Reporting/Export                                      |
+|   - Plan Assignment Engine                                |
++-----------------------------------------------------------+
+
+                    ⬇ SQLModel ORM
+
++-----------------------------------------------------------+
+|                        MySQL Database                     |
+|   Tables: users, employees, plans, policy_categories,     |
+|   plan_tiers, employee_coverage, insurers, bids,          |
+|   bidding_rounds                                          |
++-----------------------------------------------------------+
+```
+6. API Summary
+
+6.1 Authentication
+bash```
+POST /login — JWT login
+
+Employee
+GET /employees/{id}/coverage — View personal coverage
+GET /employees/{id}/claims — View required documents
+
+Admin
+POST /employees
+PUT /employees/{id}
+GET /coverage/compliance/fwmi
+GET /bidding/summary
+
+Insurer
+POST /bids
+PUT /bids/{id}
+GET /bidding_rounds/current
+```
+OpenAPI documentation:
+bash```
+<vm-host>:8000/docs
+```
+7. Database Schema
+Key Tables
+bash```
+employees — Name, designation, category, project code
+plans — Plan 1/2/3/4 definitions (extracted from AIA document)
+policy_categories — GTL, GCI, GPA, GHS, GMM, FWMI
+plan_tiers — mapping of plan → policy → coverage value
+employee_coverage — auto-assigned coverage
+insurers, bids, bidding_rounds — annual bidding logic
+```
+Full coverage values are sourced from the AIA Group Insurance Coverage 2025/2026 letter (Page 1).
+
+8. Diagrams
+(Insert screenshots when ready)--- TO BEUPDATED
+
+bash```
+System Architecture Diagram
+ERD
+Sequence Diagrams (Login, Plan Assignment, Bid Submission)
+Deployment Diagram (Docker + SoC VM)```
+
+9. Testing
+Testing includes:
+bash```
+9.1 Authentication testing (JWT validation, invalid login)
+9.2 Employee coverage retrieval tests
+9.3 Plan assignment logic (Designation → Plan → Coverage)
+9.4 FWMI compliance tests
+9.5 Bid submission & validation tests
+9.6 MySQL integration tests
+```
+Screenshots of testing logs and Postman results should be added here later.
+10. Non-Functional Requirements (NFRs)
+bash```
+10.1 All API responses must return within 2 seconds.
+10.2 JWT must secure all protected endpoints.
+10.3 Coverage data must match AIA coverage values exactly.
+10.4 The system must be runnable fully on SoC VM using Docker.
+10.5 Data must be stored using correct numeric types (no float rounding issues).
+```
+
+11. Deployment Instructions
+    
+11.1 To deploy on SoC VM:
+bash```
+git pull
+docker-compose down
+docker-compose up -d
+```
+11.2 Backend available at:
+bash```
+http://<vm-hostname>:8000
+```
+11.3 API Documentation:
+bash```
+http://<vm-hostname>:8000/docs
+```
+
+12. References
+
+- AIA Group Insurance Coverage Letter (29 Sept 2025) — Plan benefits & coverage values
+- FastAPI Documentation
+- SQLModel Documentation
+- Docker & Docker Compose Documentation
+- BIT TCX3901 Module Guide
