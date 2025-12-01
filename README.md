@@ -68,13 +68,9 @@ As an employee, I want to verify my ward class and limits before hospital visits
 
 
 As an HR admin, I want to manage employee records so that insurance headcount remains accurate.
-
 As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.
-
 As an HR admin, I want to check FWMI non-compliance so that I avoid MOM penalties.
-
 As an HR admin, I want to compare insurer bids side-by-side so that I can choose the most cost-effective insurer.
-
 As an HR admin, I want to generate coverage reports so that I can submit them to management.
 
 
@@ -82,12 +78,11 @@ As an HR admin, I want to generate coverage reports so that I can submit them to
 
 
 As an insurer, I want to view required categories so that I can prepare accurate quotations.
-
 As an insurer, I want to submit premiums for each policy type so that HR can evaluate my bids.
-
 As an insurer, I want to revise my bids before submission deadlines so that I can correct mistakes.
 
 5. System Architecture
+
 Frontend / Web Layer
 +-----------------------------------------------------------+
 |                   Frontend / Web Layer                    |
@@ -159,14 +154,12 @@ bidding_rounds       # Round 1 / Round 2 / Final
 System Architecture
 
 ERD
-
 Login Sequence Diagram
-
 Plan Assignment Sequence Diagram
-
 Bid Submission Sequence
 
 9. Testing
+
 9.1 JWT authentication tests
 9.2 Employee coverage retrieval tests
 9.3 Plan assignment logic tests
@@ -175,6 +168,7 @@ Bid Submission Sequence
 9.6 MySQL integration tests
 
 10. Non-Functional Requirements (NFRs)
+
 10.1 API responses must return within 2 seconds.
 10.2 JWT must secure all protected endpoints.
 10.3 Coverage data must match AIA values exactly.
@@ -182,6 +176,7 @@ Bid Submission Sequence
 10.5 Numeric values must use proper types (no float errors).
 
 11. Deployment Instructions
+
 Deploy on SoC VM
 git pull
 docker-compose down
@@ -195,12 +190,8 @@ http://<vm-hostname>:8000/docs
 
 12. References
 
-AIA Group Insurance Coverage Letter (29 Sept 2025)
-
-FastAPI Documentation
-
-SQLModel Documentation
-
-Docker Documentation
-
-BIT TCX3901 Module Guide
+-AIA Group Insurance Coverage Letter (29 Sept 2025)
+-FastAPI Documentation
+-SQLModel Documentation
+-Docker Documentation
+-BIT TCX3901 Module Guide
