@@ -1,4 +1,3 @@
-✅ COPY–PASTE THIS DIRECTLY INTO README.md (Codespaces-Safe Version)
 # TCX3901 Insurance Checking Portal
 
 ## 1. Project Description
