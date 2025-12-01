@@ -47,15 +47,20 @@ insurance-checking-portal/
 ├── requirements.txt      # Python dependencies
 └── README.md             # documentation
 ```
+
 4. User Stories
+
 4.1 Employee User Stories
+
 bash```
 As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).
 As an employee, I want to see claim document requirements so that I can prepare claims properly.
 As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.
-As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.```
+As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.
+```
 
 4.2 HR Admin User Stories
+
 bash```
 As an HR admin, I want to manage employee records so that insurance headcount remains accurate.
 As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.
@@ -63,13 +68,17 @@ As an HR admin, I want to check FWMI non-compliance so that I avoid MOM penaltie
 As an HR admin, I want to compare insurer bids side-by-side so that I can choose the most cost-effective insurer.
 As an HR admin, I want to generate coverage reports so that I can submit them to management.
 ```
+
 4.3 Insurer User Stories
+
 bash```
 As an insurer, I want to view required categories so that I can prepare accurate quotations.
 As an insurer, I want to submit premiums for each policy type so that HR can evaluate my bids.
 As an insurer, I want to revise my bids before submission deadlines so that I can correct mistakes.
 ```
+
 5. System Architecture
+
 bash```
 +-----------------------------------------------------------+
 |                   Frontend / Web Layer                    |
@@ -77,7 +86,8 @@ bash```
 |   - Admin Dashboard                                       |
 |   - Insurer Bid Portal                                    |
 +-----------------------------------------------------------+
-
+```
+bash```
                     ⬇ HTTPS (JWT Protected)
 
 +-----------------------------------------------------------+
@@ -89,7 +99,8 @@ bash```
 |   - Reporting/Export                                      |
 |   - Plan Assignment Engine                                |
 +-----------------------------------------------------------+
-
+```
+bash```
                     ⬇ SQLModel ORM
 
 +-----------------------------------------------------------+
@@ -99,33 +110,46 @@ bash```
 |   bidding_rounds                                          |
 +-----------------------------------------------------------+
 ```
+
 6. API Summary
 
-6.1 Authentication
+- Authentication
+
 bash```
 POST /login — JWT login
+```
 
-Employee
+- Employee
+
+bash```
 GET /employees/{id}/coverage — View personal coverage
 GET /employees/{id}/claims — View required documents
+```
 
-Admin
+- Admin
+
+bash```
 POST /employees
 PUT /employees/{id}
 GET /coverage/compliance/fwmi
 GET /bidding/summary
 
-Insurer
+- Insurer
 POST /bids
 PUT /bids/{id}
 GET /bidding_rounds/current
 ```
-OpenAPI documentation:
+
+- OpenAPI documentation:
+
 bash```
 <vm-host>:8000/docs
 ```
+
 7. Database Schema
-Key Tables
+
+- Key Tables
+
 bash```
 employees — Name, designation, category, project code
 plans — Plan 1/2/3/4 definitions (extracted from AIA document)
@@ -134,19 +158,23 @@ plan_tiers — mapping of plan → policy → coverage value
 employee_coverage — auto-assigned coverage
 insurers, bids, bidding_rounds — annual bidding logic
 ```
+
 Full coverage values are sourced from the AIA Group Insurance Coverage 2025/2026 letter (Page 1).
 
 8. Diagrams
-(Insert screenshots when ready)--- TO BEUPDATED
+(Insert screenshots when ready)--- TO BE UPDATED
 
 bash```
 System Architecture Diagram
 ERD
 Sequence Diagrams (Login, Plan Assignment, Bid Submission)
-Deployment Diagram (Docker + SoC VM)```
+Deployment Diagram (Docker + SoC VM)
+```
 
 9. Testing
+
 Testing includes:
+
 bash```
 9.1 Authentication testing (JWT validation, invalid login)
 9.2 Employee coverage retrieval tests
@@ -156,7 +184,9 @@ bash```
 9.6 MySQL integration tests
 ```
 Screenshots of testing logs and Postman results should be added here later.
+
 10. Non-Functional Requirements (NFRs)
+
 bash```
 10.1 All API responses must return within 2 seconds.
 10.2 JWT must secure all protected endpoints.
@@ -168,16 +198,20 @@ bash```
 11. Deployment Instructions
     
 11.1 To deploy on SoC VM:
+
 bash```
 git pull
 docker-compose down
 docker-compose up -d
 ```
 11.2 Backend available at:
+
 bash```
 http://<vm-hostname>:8000
 ```
+
 11.3 API Documentation:
+
 bash```
 http://<vm-hostname>:8000/docs
 ```
