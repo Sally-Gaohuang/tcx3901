@@ -1,30 +1,39 @@
 # TCX3901 Insurance Checking Portal
 1. Project Description
+
 bash```
 The Insurance Checking Portal is a backend-driven web system designed to automate the insurance management workflow at Kurihara Kogyo Co. Ltd. The system provides:
 Daily-use features such as employee insurance self-checking
 HR operational tools for plan assignment and compliance checking
 Annual bidding functions for insurers to submit quotes
-This platform replaces Excel-based manual processes with a modern FastAPI–MySQL solution deployed on the NUS SoC VM using Docker.```
+This platform replaces Excel-based manual processes with a modern FastAPI–MySQL solution deployed on the NUS SoC VM using Docker.
+```
+
 2. Setup
+
 Step 1 — Clone the repository
+
 bash```
 git clone https://github.com/<your-repo>.git
 cd insurance-checking-portal```
 
 Step 2 — Start the system with Docker
 bash```
-docker-compose up -d```
-
+docker-compose up -d
+```
 
 This starts:
+
 bash```
 FastAPI backend (port 8000)
 MySQL database (port 3306)
 ```
+
 Step 3 — Access API docs
+
 bash```
-http://<vm-hostname>:8000/docs```
+http://<vm-hostname>:8000/docs
+```
 
 3. Code Structure
 bash```
@@ -87,6 +96,7 @@ bash```
 |   - Insurer Bid Portal                                    |
 +-----------------------------------------------------------+
 ```
+
 bash```
                     ⬇ HTTPS (JWT Protected)
 
@@ -100,6 +110,7 @@ bash```
 |   - Plan Assignment Engine                                |
 +-----------------------------------------------------------+
 ```
+
 bash```
                     ⬇ SQLModel ORM
 
@@ -133,8 +144,11 @@ POST /employees
 PUT /employees/{id}
 GET /coverage/compliance/fwmi
 GET /bidding/summary
+```
 
 - Insurer
+
+bash```
 POST /bids
 PUT /bids/{id}
 GET /bidding_rounds/current
@@ -162,6 +176,7 @@ insurers, bids, bidding_rounds — annual bidding logic
 Full coverage values are sourced from the AIA Group Insurance Coverage 2025/2026 letter (Page 1).
 
 8. Diagrams
+
 (Insert screenshots when ready)--- TO BE UPDATED
 
 bash```
@@ -183,6 +198,7 @@ bash```
 9.5 Bid submission & validation tests
 9.6 MySQL integration tests
 ```
+
 Screenshots of testing logs and Postman results should be added here later.
 
 10. Non-Functional Requirements (NFRs)
@@ -204,6 +220,7 @@ git pull
 docker-compose down
 docker-compose up -d
 ```
+
 11.2 Backend available at:
 
 bash```
@@ -215,6 +232,7 @@ http://<vm-hostname>:8000
 bash```
 http://<vm-hostname>:8000/docs
 ```
+
 
 12. References
 
