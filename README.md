@@ -57,9 +57,85 @@ insurance-checking-portal/
 
 ### 4.1 Employee User Stories
 - As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).
+  
+1. ORM Logic - Return all insurance coverages assigned to the employee, grouped by category.
+  ORM Entities
+    Employee
+    EmployeeCoverage
+    Plan
+    PolicyCategory
+
+```text
+coverage = (
+    session.query(EmployeeCoverage)
+    .join(Plan)
+    .join(PolicyCategory)
+    .filter(EmployeeCoverage.employee_id == employee_id)
+    .all()
+)
+```
+
+2. ORM Logic -  Return all required documents based on the insurance category (GPA, GHS, etc.).
+   ORM Entities
+    PolicyCategory
+    DocumentRequirement
+
 - As an employee, I want to see claim document requirements so that I can prepare claims properly.
+
+```text
+requirements = (
+    session.query(DocumentRequirement)
+    .join(PolicyCategory)
+    .filter(DocumentRequirement.category_id == category_id)
+    .all()
+)
+```
+  
 - As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.
+3. ORM Logic - Validate that the worker’s assigned FWMI meets MOM minimum medical coverage rules.
+- ORM Entities
+  Employee
+  EmployeeCoverage
+  Plan
+  PlanTier
+
+```text
+fwmi = (
+    session.query(EmployeeCoverage)
+    .join(Plan).join(PlanTier)
+    .filter(
+        EmployeeCoverage.employee_id == employee_id,
+        PolicyCategory.code == "FWMI"
+    )
+    .first()
+)
+
+is_compliant = fwmi.plan_tier.coverage_amount >= MIN_FWMI_AMOUNT
+```
+
+
 - As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.
+4. ORM Logic - Return the ward class (A/B1/B2) and maximum payout limit for medical procedures.
+  ORM Entities
+    EmployeeCoverage
+    Plan
+    PlanTier
+
+```text
+ward_info = (
+    session.query(PlanTier)
+    .join(Plan)
+    .join(EmployeeCoverage)
+    .filter(
+        EmployeeCoverage.employee_id == employee_id,
+        PolicyCategory.code == "GHS"   # GHS = Hospitalisation Plan
+    )
+    .first()
+)
+
+allowed_ward_class = ward_info.ward_class
+max_limit = ward_info.annual_limit
+```
 
 ### 4.2 HR Admin User Stories
 - As an HR admin, I want to manage employee records so that insurance headcount remains accurate.
