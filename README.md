@@ -81,32 +81,34 @@ insurance-checking-portal/
 ```mermaid
 flowchart TD
 
-Frontend["Frontend / Web Layer<br>:::left
-• Employee Dashboard<br>
-• Admin Dashboard<br>
+Frontend["Frontend / Web Layer
+• Employee Dashboard
+• Admin Dashboard
 • Insurer Bid Portal"]
 
-
-FastAPI["FastAPI Application Layer<br>:::left
-• Authentication (JWT)<br>
-• Employee Coverage API<br>
-• Admin CRUD & Compliance API<br>
-• Insurer Bidding API<br>
-• Reporting / Export<br>
+FastAPI["FastAPI Application Layer
+• Authentication (JWT)
+• Employee Coverage API
+• Admin CRUD & Compliance API
+• Insurer Bidding API
+• Reporting / Export
 • Plan Assignment Engine"]
 
-
-Database["MySQL Database Layer<br>:::left
-Tables:<br>
-users, employees, plans,<br>
-policy_categories, plan_tiers,<br>
-employee_coverage, insurers,<br>
+Database["MySQL Database Layer
+Tables:
+users, employees, plans,
+policy_categories, plan_tiers,
+employee_coverage, insurers,
 bids, bidding_rounds"]
-
 
 Frontend -->|"HTTPS (JWT Protected)"| FastAPI
 FastAPI -->|"SQLModel ORM"| Database
+
+%% LEFT ALIGN STYLE
+classDef leftAlign text-align:left;
+class Frontend,FastAPI,Database leftAlign;
 ```
+
 
 
 ## 6. API Summary
