@@ -148,11 +148,10 @@ ward_info = (
 
 allowed_ward_class = ward_info.ward_class
 max_limit = ward_info.annual_limit
-```
+
 
 ### 4.2 HR Admin User Stories
 
----
 
 ### 🟥 **User Story 1 — Manage Employee Records**
 **As an HR admin, I want to manage employee records so that insurance headcount remains accurate.**
@@ -167,9 +166,9 @@ Allow HR to create, update, deactivate, and retrieve employee records.
 
 ```text
 employee = session.query(Employee).filter(Employee.id == emp_id).first()
-# Update fields and commit
+# Update fields and commit```
 
----
+
 ### 🟥 **User Story 2 — Automatic Plan Assignment**
 **As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.**
 
@@ -187,8 +186,7 @@ assigned_plan = (
     session.query(PlanTier)
     .filter(PlanTier.designation == employee.designation)
     .first()
-)
-```
+)```
 
 ### 🟥 **User Story 3 — FWMI Non-Compliance Check**
 **As an HR admin, I want to check FWMI non-compliance so that I avoid MOM penalties.**
@@ -212,8 +210,7 @@ non_compliant = (
         PlanTier.coverage_amount < MIN_FWMI_AMOUNT
     )
     .all()
-)
-```
+)```
 
 ### 🟥 **User Story 4 — Compare Insurer Bids**
 **As an HR admin, I want to compare insurer bids side-by-side so that I can choose the most cost-effective insurer.**
@@ -233,8 +230,7 @@ bids = (
     .filter(Bid.round_id == round_id)
     .order_by(Bid.price.asc())
     .all()
-)
-```
+)```
 
 ### 🟥 **User Story 5 — Generate Coverage Reports**
 **As an HR admin, I want to generate coverage reports so that I can submit them to management.**
