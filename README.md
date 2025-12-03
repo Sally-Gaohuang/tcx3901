@@ -80,7 +80,7 @@ coverage = (
     .all()
 )
 
-### 🟥 **User Story 2 — Check Claim Document Requirements**
+### **🟦 User Story 2 — Check Claim Document Requirements**
 **As an employee, I want to see claim document requirements so that I can prepare claims properly.**
 
 #### **ORM Logic**
@@ -99,7 +99,7 @@ requirements = (
 )
 ```
 
-### 🟥 **User Story 3 — Check FWMI Compliance**  
+### **🟦 User Story 3 — Check FWMI Compliance**  
 **As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.**
 
 #### **ORM Logic**
@@ -124,7 +124,7 @@ fwmi = (
 is_compliant = fwmi.plan_tier.coverage_amount >= MIN_FWMI_AMOUNT
 ```
 
-### 🟥 **User Story 4 — Verify Ward Class & Limits**
+### **🟦 User Story 4 — Verify Ward Class & Limits**
 **As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.**
 
 #### **ORM Logic**
@@ -169,7 +169,7 @@ Allow HR to create, update, deactivate, and retrieve employee records.
 employee = session.query(Employee).filter(Employee.id == emp_id).first()
 # Update fields and commit
 
-### 🟦 **User Story 2 — Automatic Plan Assignment**
+### 🟥 **User Story 2 — Automatic Plan Assignment**
 **As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.**
 
 #### **ORM Logic**
@@ -189,7 +189,7 @@ assigned_plan = (
 )
 ```
 
-### 🟦 **User Story 3 — FWMI Non-Compliance Check**
+### 🟥 **User Story 3 — FWMI Non-Compliance Check**
 **As an HR admin, I want to check FWMI non-compliance so that I avoid MOM penalties.**
 
 #### **ORM Logic**
@@ -214,7 +214,7 @@ non_compliant = (
 )
 ```
 
-### 🟦 **User Story 4 — Compare Insurer Bids**
+### 🟥 **User Story 4 — Compare Insurer Bids**
 **As an HR admin, I want to compare insurer bids side-by-side so that I can choose the most cost-effective insurer.**
 
 #### **ORM Logic**
@@ -235,7 +235,7 @@ bids = (
 )
 ```
 
-### 🟦 **User Story 5 — Generate Coverage Reports**
+### 🟥 **User Story 5 — Generate Coverage Reports**
 **As an HR admin, I want to generate coverage reports so that I can submit them to management.**
 
 #### **ORM Logic**
