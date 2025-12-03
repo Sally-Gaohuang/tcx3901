@@ -57,7 +57,6 @@ insurance-checking-portal/
 
 ### 4.1 Employee User Stories
 
----
 
 ### 🟦 **User Story 1 — View Insurance Coverage**
 **As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).**
@@ -163,7 +162,6 @@ max_limit = ward_info.annual_limit
 
 ### 4.2 HR Admin User Stories
 
----
 
 ### 🟥 **User Story 1 — Manage Employee Records**
 **As an HR admin, I want to manage employee records so that insurance headcount remains accurate.**
@@ -280,7 +278,6 @@ report = (
 
 ### 4.3 Insurer User Stories
 
----
 
 ### 🟦 **User Story 1 — View Required Insurance Categories**
 **As an insurer, I want to view required categories so that I can prepare accurate quotations.**
