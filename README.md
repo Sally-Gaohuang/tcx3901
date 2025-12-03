@@ -77,38 +77,31 @@ insurance-checking-portal/
 ---
 
 ## 5. System Architecture
+flowchart TD
 
-============================================================
-                     SYSTEM ARCHITECTURE
-============================================================
+subgraph Frontend["Frontend / Web Layer"]
+    F1["• Employee Dashboard"]
+    F2["• Admin Dashboard"]
+    F3["• Insurer Bid Portal"]
+end
 
-Frontend / Web Layer
-+-----------------------------------------------------------+
-|   • Employee Dashboard                                    |
-|   • Admin Dashboard                                       |
-|   • Insurer Bid Portal                                    |
-+-----------------------------------------------------------+
+subgraph FastAPI["FastAPI Application Layer"]
+    A1["• Authentication (JWT)"]
+    A2["• Employee Coverage API"]
+    A3["• Admin CRUD & Compliance API"]
+    A4["• Insurer Bidding API"]
+    A5["• Reporting / Export"]
+    A6["• Plan Assignment Engine"]
+end
 
-                         ↓ HTTPS (JWT Protected)
+subgraph MySQL["MySQL Database Layer"]
+    DB["Tables: users, employees, plans, policy_categories, plan_tiers,
+         employee_coverage, insurers, bids, bidding_rounds"]
+end
 
-FastAPI Application Layer
-+-----------------------------------------------------------+
-|   • Authentication (JWT)                                  |
-|   • Employee Coverage API                                 |
-|   • Admin CRUD & Compliance API                           |
-|   • Insurer Bidding API                                   |
-|   • Reporting / Export                                    |
-|   • Plan Assignment Engine                                |
-+-----------------------------------------------------------+
+Frontend -->|"HTTPS (JWT Protected)"| FastAPI
+FastAPI -->|"SQLModel ORM"| MySQL
 
-                         ↓ SQLModel ORM
-
-MySQL Database Layer
-+-----------------------------------------------------------+
-|   Tables:                                                 |
-|   users, employees, plans, policy_categories, plan_tiers, |
-|   employee_coverage, insurers, bids, bidding_rounds       |
-+-----------------------------------------------------------+
 
 ## 6. API Summary
 
