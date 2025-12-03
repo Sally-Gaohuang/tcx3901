@@ -58,7 +58,6 @@ insurance-checking-portal/
 ### 4.1 Employee User Stories
 
 ---
-
 ### **🟦 User Story 1 — View Insurance Coverage**
 **As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).**
 
@@ -97,8 +96,8 @@ requirements = (
     .join(PolicyCategory)
     .filter(DocumentRequirement.category_id == category_id)
     .all()
-)
-```
+)```
+
 ---
 ### **🟦 User Story 3 — Check FWMI Compliance**  
 **As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.**
