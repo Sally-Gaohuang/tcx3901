@@ -79,7 +79,7 @@ coverage = (
     .all()
 )```
 
----
+
 ### **🟦 User Story 2 — Check Claim Document Requirements**
 **As an employee, I want to see claim document requirements so that I can prepare claims properly.**
 
@@ -98,7 +98,7 @@ requirements = (
     .all()
 )```
 
----
+
 ### **🟦 User Story 3 — Check FWMI Compliance**  
 **As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.**
 
@@ -124,7 +124,7 @@ fwmi = (
 is_compliant = fwmi.plan_tier.coverage_amount >= MIN_FWMI_AMOUNT
 ```
 
----
+
 ### **🟦 User Story 4 — Verify Ward Class & Limits**
 **As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.**
 
@@ -169,7 +169,7 @@ Allow HR to create, update, deactivate, and retrieve employee records.
 employee = session.query(Employee).filter(Employee.id == emp_id).first()
 # Update fields and commit```
 
----
+
 ### 🟥 **User Story 2 — Automatic Plan Assignment**
 **As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.**
 
@@ -189,7 +189,7 @@ assigned_plan = (
     .first()
 )```
 
----
+
 ### 🟥 **User Story 3 — FWMI Non-Compliance Check**
 **As an HR admin, I want to check FWMI non-compliance so that I avoid MOM penalties.**
 
@@ -214,7 +214,7 @@ non_compliant = (
     .all()
 )```
 
----
+
 ### 🟥 **User Story 4 — Compare Insurer Bids**
 **As an HR admin, I want to compare insurer bids side-by-side so that I can choose the most cost-effective insurer.**
 
@@ -235,7 +235,7 @@ bids = (
     .all()
 )```
 
----
+
 ### 🟥 **User Story 5 — Generate Coverage Reports**
 **As an HR admin, I want to generate coverage reports so that I can submit them to management.**
 
@@ -259,7 +259,6 @@ report = (
 ### 4.3 Insurer User Stories
 
 ---
-
 ### 🟦 **User Story 1 — View Required Insurance Categories**
 **As an insurer, I want to view required categories so that I can prepare accurate quotations.**
 
@@ -278,7 +277,7 @@ categories = (
     .all()
 )```
 
----
+
 ### 🟦 **User Story 2 — Submit Premiums for Each Policy Type**
 **As an insurer, I want to submit premiums for each policy type so that HR can evaluate my bids.**
 
@@ -301,7 +300,7 @@ new_bid = Bid(
 session.add(new_bid)
 session.commit()```
 
----
+
 ### 🟦 **User Story 3 — Revise Bids Before Deadline**
 **As an insurer, I want to revise my bids before submission deadlines so that I can correct mistakes.**
 
