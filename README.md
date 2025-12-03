@@ -169,6 +169,7 @@ Allow HR to create, update, deactivate, and retrieve employee records.
 employee = session.query(Employee).filter(Employee.id == emp_id).first()
 # Update fields and commit
 
+---
 ### 🟥 **User Story 2 — Automatic Plan Assignment**
 **As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.**
 
