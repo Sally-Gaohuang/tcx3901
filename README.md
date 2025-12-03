@@ -77,7 +77,7 @@ insurance-checking-portal/
 ---
 
 ## 5. System Architecture
-
+bash```
 Frontend / Web Layer
 +-----------------------------------------------------------+
 |                   Frontend / Web Layer                    |
@@ -106,7 +106,7 @@ MySQL Database Layer
 |   plan_tiers, employee_coverage, insurers, bids,          |
 |   bidding_rounds                                          |
 +-----------------------------------------------------------+
-
+```
 ---
 
 ## 6. API Summary
