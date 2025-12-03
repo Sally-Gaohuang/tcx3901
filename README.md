@@ -77,6 +77,8 @@ insurance-checking-portal/
 ---
 
 ## 5. System Architecture
+
+```mermaid
 flowchart TD
 
 subgraph Frontend["Frontend / Web Layer"]
@@ -101,6 +103,7 @@ end
 
 Frontend -->|"HTTPS (JWT Protected)"| FastAPI
 FastAPI -->|"SQLModel ORM"| MySQL
+```
 
 
 ## 6. API Summary
