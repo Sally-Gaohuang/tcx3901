@@ -77,37 +77,39 @@ insurance-checking-portal/
 ---
 
 ## 5. System Architecture
-bash```
+
+============================================================
+                    5. SYSTEM ARCHITECTURE
+============================================================
+
 Frontend / Web Layer
 +-----------------------------------------------------------+
-|                   Frontend / Web Layer                    |
 |   • Employee Dashboard                                    |
 |   • Admin Dashboard                                       |
 |   • Insurer Bid Portal                                    |
 +-----------------------------------------------------------+
 
-FastAPI Application Layer
                     ↓ HTTPS (JWT Protected)
+
+FastAPI Application Layer
 +-----------------------------------------------------------+
-|                    FastAPI Application Layer              |
 |   • Authentication (JWT)                                  |
 |   • Employee Coverage API                                 |
-|   • Admin CRUD and Compliance API                         |
+|   • Admin CRUD & Compliance API                           |
 |   • Insurer Bidding API                                   |
 |   • Reporting / Export                                    |
 |   • Plan Assignment Engine                                |
 +-----------------------------------------------------------+
 
-MySQL Database Layer
                     ↓ SQLModel ORM
+
+MySQL Database Layer
 +-----------------------------------------------------------+
-|                        MySQL Database                     |
-|   Tables: users, employees, plans, policy_categories,     |
-|   plan_tiers, employee_coverage, insurers, bids,          |
-|   bidding_rounds                                          |
+|   Tables:                                                  |
+|   users, employees, plans, policy_categories, plan_tiers, |
+|   employee_coverage, insurers, bids, bidding_rounds       |
 +-----------------------------------------------------------+
-bash```
----
+
 
 ## 6. API Summary
 
