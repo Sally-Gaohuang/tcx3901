@@ -58,7 +58,8 @@ insurance-checking-portal/
 ### 4.1 Employee User Stories
 
 ---
-### **🟦 User Story 1 — View Insurance Coverage**
+
+### 🟦 **User Story 1 — View Insurance Coverage**
 **As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).**
 
 #### **ORM Logic**
@@ -77,18 +78,20 @@ coverage = (
     .join(PolicyCategory)
     .filter(EmployeeCoverage.employee_id == employee_id)
     .all()
-)```
+)
+```
 
+---
 
-### **🟦 User Story 2 — Check Claim Document Requirements**
+### 🟦 **User Story 2 — Check Claim Document Requirements**
 **As an employee, I want to see claim document requirements so that I can prepare claims properly.**
 
 #### **ORM Logic**
 Return all required documents based on the insurance category (GPA, GHS, etc.).
 
 #### **ORM Entities**
-- PolicyCategory
-- DocumentRequirement
+- PolicyCategory  
+- DocumentRequirement  
 
 ```text
 requirements = (
@@ -96,19 +99,22 @@ requirements = (
     .join(PolicyCategory)
     .filter(DocumentRequirement.category_id == category_id)
     .all()
-)```
+)
+```
 
+---
 
-### **🟦 User Story 3 — Check FWMI Compliance**  
+### 🟦 **User Story 3 — Check FWMI Compliance**
 **As a WP/S-Pass holder, I want to check FWMI compliance so that I feel secure about my coverage.**
 
 #### **ORM Logic**
 Validate that the worker’s assigned FWMI meets MOM minimum medical coverage rules.
+
 #### **ORM Entities**
-- Employee
-- EmployeeCoverage
-- Plan
-- PlanTier
+- Employee  
+- EmployeeCoverage  
+- Plan  
+- PlanTier  
 
 ```text
 fwmi = (
@@ -124,16 +130,18 @@ fwmi = (
 is_compliant = fwmi.plan_tier.coverage_amount >= MIN_FWMI_AMOUNT
 ```
 
+---
 
-### **🟦 User Story 4 — Verify Ward Class & Limits**
+### 🟦 **User Story 4 — Verify Ward Class & Limits**
 **As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.**
 
 #### **ORM Logic**
-- Return the ward class (A/B1/B2) and maximum payout limit for medical procedures.
-- ORM Entities
-- EmployeeCoverage
-- Plan
-- PlanTier
+Return the ward class (A/B1/B2) and maximum payout limit for medical procedures.
+
+#### **ORM Entities**
+- EmployeeCoverage  
+- Plan  
+- PlanTier  
 
 ```text
 ward_info = (
@@ -142,18 +150,23 @@ ward_info = (
     .join(EmployeeCoverage)
     .filter(
         EmployeeCoverage.employee_id == employee_id,
-        PolicyCategory.code == "GHS"   # GHS = Hospitalisation Plan
+        PolicyCategory.code == "GHS"
     )
     .first()
 )
 
 allowed_ward_class = ward_info.ward_class
 max_limit = ward_info.annual_limit
+```
 
+---
+
+---
 
 ### 4.2 HR Admin User Stories
 
 ---
+
 ### 🟥 **User Story 1 — Manage Employee Records**
 **As an HR admin, I want to manage employee records so that insurance headcount remains accurate.**
 
@@ -167,8 +180,10 @@ Allow HR to create, update, deactivate, and retrieve employee records.
 
 ```text
 employee = session.query(Employee).filter(Employee.id == emp_id).first()
-# Update fields and commit```
+# Update fields and commit
+```
 
+---
 
 ### 🟥 **User Story 2 — Automatic Plan Assignment**
 **As an HR admin, I want automatic plan assignment based on designation so that coverage allocation follows AIA plans.**
@@ -177,18 +192,20 @@ employee = session.query(Employee).filter(Employee.id == emp_id).first()
 Assign insurance plan tiers automatically based on employee designation.
 
 #### **ORM Entities**
-- Employee
-- Plan
-- PlanTier
-- DesignationRule
+- Employee  
+- Plan  
+- PlanTier  
+- DesignationRule  
 
 ```text
 assigned_plan = (
     session.query(PlanTier)
     .filter(PlanTier.designation == employee.designation)
     .first()
-)```
+)
+```
 
+---
 
 ### 🟥 **User Story 3 — FWMI Non-Compliance Check**
 **As an HR admin, I want to check FWMI non-compliance so that I avoid MOM penalties.**
@@ -197,10 +214,10 @@ assigned_plan = (
 Identify workers whose FWMI coverage falls below MOM minimum coverage requirements.
 
 #### **ORM Entities**
-- Employee
-- EmployeeCoverage
-- PlanTier
-- PolicyCategory
+- Employee  
+- EmployeeCoverage  
+- PlanTier  
+- PolicyCategory  
 
 ```text
 non_compliant = (
@@ -212,8 +229,10 @@ non_compliant = (
         PlanTier.coverage_amount < MIN_FWMI_AMOUNT
     )
     .all()
-)```
+)
+```
 
+---
 
 ### 🟥 **User Story 4 — Compare Insurer Bids**
 **As an HR admin, I want to compare insurer bids side-by-side so that I can choose the most cost-effective insurer.**
@@ -222,9 +241,9 @@ non_compliant = (
 Return all insurer bids for the same bidding round, ordered by premium.
 
 #### **ORM Entities**
-- Insurer
-- Bid
-- BiddingRound
+- Insurer  
+- Bid  
+- BiddingRound  
 
 ```text
 bids = (
@@ -233,8 +252,10 @@ bids = (
     .filter(Bid.round_id == round_id)
     .order_by(Bid.price.asc())
     .all()
-)```
+)
+```
 
+---
 
 ### 🟥 **User Story 5 — Generate Coverage Reports**
 **As an HR admin, I want to generate coverage reports so that I can submit them to management.**
@@ -243,10 +264,10 @@ bids = (
 Summarise employee coverage count by insurance category.
 
 #### **ORM Entities**
-- Employee
-- EmployeeCoverage
-- Plan
-- PolicyCategory
+- Employee  
+- EmployeeCoverage  
+- Plan  
+- PolicyCategory  
 
 ```text
 report = (
@@ -254,11 +275,17 @@ report = (
     .join(EmployeeCoverage)
     .group_by(PolicyCategory.code)
     .all()
-)```
+)
+```
+
+---
+
+---
 
 ### 4.3 Insurer User Stories
 
 ---
+
 ### 🟦 **User Story 1 — View Required Insurance Categories**
 **As an insurer, I want to view required categories so that I can prepare accurate quotations.**
 
@@ -268,27 +295,28 @@ Retrieve all insurance policy categories that require quotations for the active 
 #### **ORM Entities**
 - PolicyCategory  
 - BiddingRound  
-- CategoryRequirement (if defined)
 
 ```text
 categories = (
     session.query(PolicyCategory)
     .filter(PolicyCategory.is_required == True)
     .all()
-)```
+)
+```
 
+---
 
 ### 🟦 **User Story 2 — Submit Premiums for Each Policy Type**
 **As an insurer, I want to submit premiums for each policy type so that HR can evaluate my bids.**
 
 #### **ORM Logic**
-Allow insurers to insert or update premium submissions for each insurance category within a bidding round.
+Insert or update premium submissions for each category within a bidding round.
 
 #### **ORM Entities**
-- Insurer
-- Bid
-- PolicyCategory
-- BiddingRound
+- Insurer  
+- Bid  
+- PolicyCategory  
+- BiddingRound  
 
 ```text
 new_bid = Bid(
@@ -298,19 +326,21 @@ new_bid = Bid(
     premium=premium_amount
 )
 session.add(new_bid)
-session.commit()```
+session.commit()
+```
 
+---
 
 ### 🟦 **User Story 3 — Revise Bids Before Deadline**
 **As an insurer, I want to revise my bids before submission deadlines so that I can correct mistakes.**
 
 #### **ORM Logic**
-Allow insurers to update existing bids if the current time is still before the bidding round deadline.
+Allow bid updates only if the current time is before the bidding deadline.
 
 #### **ORM Entities**
-- Bid
-- BiddingRound
-- Insurer
+- Bid  
+- BiddingRound  
+- Insurer  
 
 ```text
 bid = (
@@ -325,7 +355,10 @@ bid = (
 
 if now < bidding_round.deadline:
     bid.premium = updated_amount
-    session.commit()```
+    session.commit()
+```
+
+---
 
 ---
 
@@ -361,6 +394,8 @@ FastAPI -->|"SQLModel ORM"| Database
 classDef leftAlign text-align:left;
 class Frontend,FastAPI,Database leftAlign;
 ```
+
+
 
 
 ---
