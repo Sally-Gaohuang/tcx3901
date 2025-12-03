@@ -1,6 +1,7 @@
 # file: api/services/insurer_service.py
 from sqlmodel import Session, select
 from api.database.database import engine
+from api.database.database import SessionLocal
 from api.models import PolicyCategory, Bid, BiddingRound
 
 def get_required_categories():

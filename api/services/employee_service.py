@@ -1,6 +1,8 @@
 # file: api/services/employee_service.py
 from sqlmodel import Session, select
 from api.database.database import engine
+from api.database.database import SessionLocal
+
 from api.models import (
     User, Employee, Plan, PlanTier,
     PolicyCategory, BiddingRound, Bid

@@ -1,6 +1,7 @@
 from sqlmodel import Session, select
 from database import engine
 from api.models import User, Plan, PolicyCategory
+from api.database.database import engine, SessionLocal
 
 from api.models.models import (
     User, Employee, PolicyCategory, Plan, PlanTier,
