@@ -106,7 +106,7 @@ MySQL Database Layer
 |   plan_tiers, employee_coverage, insurers, bids,          |
 |   bidding_rounds                                          |
 +-----------------------------------------------------------+
-```
+bash```
 ---
 
 ## 6. API Summary
