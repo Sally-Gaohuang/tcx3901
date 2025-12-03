@@ -161,8 +161,6 @@ max_limit = ward_info.annual_limit
 
 ---
 
----
-
 ### 4.2 HR Admin User Stories
 
 ---
@@ -280,8 +278,6 @@ report = (
 
 ---
 
----
-
 ### 4.3 Insurer User Stories
 
 ---
@@ -357,8 +353,6 @@ if now < bidding_round.deadline:
     bid.premium = updated_amount
     session.commit()
 ```
-
----
 
 ---
 
