@@ -39,18 +39,34 @@ insurance-checking-portal/
 ├── api/
 │   ├── main.py
 │   ├── auth/
+│   │     ├── __init__.py
+│   │     └── auth_service.py
+│   ├── database/
+│   │     ├── __init__.py
+│   │     └── database.py
 │   ├── models/
+│   │     ├── __init__.py
+│   │     └── models.py
 │   ├── routers/
+│   │     ├── admin.py
+│   │     ├── employee.py
+│   │     ├── insurer.py
+│   │     ├── bidding.py
+│   │     ├── coverage.py
+│   │     └── test_auth.py
 │   └── services/
-├── database.py
+│         ├── admin_service.py
+│         ├── employee_service.py
+│         ├── insurer_service.py
+│         ├── bidding_service.py
+│         └── coverage_service.py
+├── main.py (OPTIONAL – if you plan multiple apps)
 ├── seed.py
-├── sql/
-│   └── schema.sql
-├── web/
 ├── docker-compose.yml
+├── Dockerfile
 ├── requirements.txt
+├── .gitignore
 └── README.md
-
 ```
 
 ---
