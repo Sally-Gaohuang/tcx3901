@@ -45,10 +45,12 @@ insurance-checking-portal/
 ├── database.py
 ├── seed.py
 ├── sql/
+│   └── schema.sql
 ├── web/
 ├── docker-compose.yml
 ├── requirements.txt
 └── README.md
+
 ```
 
 ---
