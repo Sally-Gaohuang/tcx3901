@@ -56,14 +56,20 @@ insurance-checking-portal/
 ## 4. User Stories
 
 ### 4.1 Employee User Stories
-- As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).
-  
-1. ORM Logic - Return all insurance coverages assigned to the employee, grouped by category.
-  ORM Entities
-    Employee
-    EmployeeCoverage
-    Plan
-    PolicyCategory
+
+---
+
+### **🟦 User Story 1 — View Insurance Coverage**
+**As an employee, I want to view my insurance coverage so that I know my entitlements (GTL, GCI, GPA, GHS, GMM, FWMI).**
+
+#### **ORM Logic**
+Return all insurance coverages assigned to the employee, grouped by category.
+
+#### **ORM Entities**
+- Employee  
+- EmployeeCoverage  
+- Plan  
+- PolicyCategory  
 
 ```text
 coverage = (
@@ -73,14 +79,12 @@ coverage = (
     .filter(EmployeeCoverage.employee_id == employee_id)
     .all()
 )
-```
 
+- As an employee, I want to see claim document requirements so that I can prepare claims properly.
 2. ORM Logic -  Return all required documents based on the insurance category (GPA, GHS, etc.).
    ORM Entities
     PolicyCategory
     DocumentRequirement
-
-- As an employee, I want to see claim document requirements so that I can prepare claims properly.
 
 ```text
 requirements = (
