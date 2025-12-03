@@ -79,7 +79,7 @@ insurance-checking-portal/
 ## 5. System Architecture
 
 ============================================================
-                    5. SYSTEM ARCHITECTURE
+                     SYSTEM ARCHITECTURE
 ============================================================
 
 Frontend / Web Layer
@@ -89,7 +89,7 @@ Frontend / Web Layer
 |   • Insurer Bid Portal                                    |
 +-----------------------------------------------------------+
 
-                    ↓ HTTPS (JWT Protected)
+                         ↓ HTTPS (JWT Protected)
 
 FastAPI Application Layer
 +-----------------------------------------------------------+
@@ -101,15 +101,14 @@ FastAPI Application Layer
 |   • Plan Assignment Engine                                |
 +-----------------------------------------------------------+
 
-                    ↓ SQLModel ORM
+                         ↓ SQLModel ORM
 
 MySQL Database Layer
 +-----------------------------------------------------------+
-|   Tables:                                                  |
+|   Tables:                                                 |
 |   users, employees, plans, policy_categories, plan_tiers, |
 |   employee_coverage, insurers, bids, bidding_rounds       |
 +-----------------------------------------------------------+
-
 
 ## 6. API Summary
 
