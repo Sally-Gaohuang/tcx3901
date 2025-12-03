@@ -33,24 +33,23 @@ http://<vm-hostname>:8000/docs
 
 ## 3. Code Structure
 
+
+```text
 insurance-checking-portal/
-│
-├── api/                  
-│   ├── main.py           
-│   ├── auth/             
-│   ├── models/           
-│   ├── routers/          
-│   ├── services/         
-│   ├── database.py       
-│   ├── seed.py           
-│
-├── sql/                  
-│
-├── web/                  
-│
-├── docker-compose.yml    
-├── requirements.txt      
-└── README.md             
+├── api/
+│   ├── main.py
+│   ├── auth/
+│   ├── models/
+│   ├── routers/
+│   └── services/
+├── database.py
+├── seed.py
+├── sql/
+├── web/
+├── docker-compose.yml
+├── requirements.txt
+└── README.md
+```
 
 ---
 
