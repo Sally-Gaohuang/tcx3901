@@ -78,7 +78,8 @@ coverage = (
     .join(PolicyCategory)
     .filter(EmployeeCoverage.employee_id == employee_id)
     .all()
-)
+)```
+
 ---
 ### **🟦 User Story 2 — Check Claim Document Requirements**
 **As an employee, I want to see claim document requirements so that I can prepare claims properly.**
@@ -123,6 +124,7 @@ fwmi = (
 
 is_compliant = fwmi.plan_tier.coverage_amount >= MIN_FWMI_AMOUNT
 ```
+
 ---
 ### **🟦 User Story 4 — Verify Ward Class & Limits**
 **As an employee, I want to verify my ward class and limits before hospital visits so I can inform hospitals accurately.**
@@ -253,8 +255,7 @@ report = (
     .join(EmployeeCoverage)
     .group_by(PolicyCategory.code)
     .all()
-)
-```
+)```
 
 ### 4.3 Insurer User Stories
 
@@ -276,8 +277,7 @@ categories = (
     session.query(PolicyCategory)
     .filter(PolicyCategory.is_required == True)
     .all()
-)
-```
+)```
 
 ---
 ### 🟦 **User Story 2 — Submit Premiums for Each Policy Type**
@@ -300,8 +300,8 @@ new_bid = Bid(
     premium=premium_amount
 )
 session.add(new_bid)
-session.commit()
-```
+session.commit()```
+
 ---
 ### 🟦 **User Story 3 — Revise Bids Before Deadline**
 **As an insurer, I want to revise my bids before submission deadlines so that I can correct mistakes.**
@@ -327,8 +327,7 @@ bid = (
 
 if now < bidding_round.deadline:
     bid.premium = updated_amount
-    session.commit()
-```
+    session.commit()```
 
 ---
 
