@@ -2,7 +2,7 @@
 from sqlmodel import Session, select
 from api.database.database import engine
 from api.models import PolicyCategory, PlanTier
-from api.database.database import SessionLocal
+# from api.database.database import SessionLocal
 
 def get_category_limits(plan_id: int):
     with Session(engine) as session:

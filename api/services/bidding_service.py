@@ -2,7 +2,7 @@
 from sqlmodel import Session, select
 from api.database.database import engine
 from api.models import Bid, BiddingRound, PolicyCategory, User
-from api.database.database import SessionLocal
+# from api.database.database import SessionLocal
 
 def get_bids_for_round(round_id: int):
     with Session(engine) as session:
