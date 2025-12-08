@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.database import init_db
+from app.routers import importer
+
 
 # Routers
 from app.auth.auth import router as auth_router
@@ -38,7 +40,7 @@ app.include_router(insurer.router, prefix="/insurer", tags=["Insurer"])
 app.include_router(bidding.router, prefix="/bidding", tags=["Bidding"])
 app.include_router(coverage.router, prefix="/coverage", tags=["Coverage"])
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
-
+app.include_router(importer.router)
 
 # Root endpoint
 @app.get("/")

@@ -1,5 +1,18 @@
-from sqlmodel import SQLModel, Field, Relationship
+# file: app/models/employee_plan.py
+
+from sqlmodel import SQLModel, Field
 
 class EmployeePlan(SQLModel, table=True):
-    employee_id: int = Field(foreign_key="employee.id", primary_key=True)
-    plan_id: int = Field(foreign_key="plan.id", primary_key=True)
+    """
+    Link table for many-to-many relationship:
+    One Employee ⇔ Many Plans
+    One Plan ⇔ Many Employees
+    """
+    employee_id: int = Field(
+        foreign_key="employee.employee_id",
+        primary_key=True
+    )
+    plan_id: int = Field(
+        foreign_key="plan.plan_id",
+        primary_key=True
+    )
