@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException
 from sqlmodel import Session, select
 from app.database.database import engine
 from app.models.models import Employee, EmployeeCreate, EmployeeUpdate
+from typing import List, Optional
+from sqlmodel import Field, SQLModel, Relationship
 
 router = APIRouter()
 
@@ -75,3 +77,18 @@ def delete_employee(employee_id: int):
         session.delete(employee)
         session.commit()
         return {"message": "Employee deleted"}
+
+# Allow multiple plans using a relationship:
+class Employee(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    employee_code: str
+    name: str
+    department: str
+    age: int
+    gender: str
+    user_id: int
+
+    plans: List["Plan"] = Relationship(
+        back_populates="employees",
+        link_model=EmployeePlan
+    )
